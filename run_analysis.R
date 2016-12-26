@@ -33,5 +33,9 @@ colnames(total)[68] = "activity"
 aggregate_total=aggregate(total[,!(colnames(total) == c("subject","activity"))], list(total$subject,total$activity), mean)
 colnames(aggregate_total)[1:2] = c("subject","activity") 
 
+#make colnames readable and delete . and upper cases
+colnames(aggregate_total) = tolower(colnames(aggregate_total))
+colnames(aggregate_total)=gsub("[.]","",colnames(aggregate_total))
+
 #write to txt file
-write.table(total,"aggregate_total.txt",row.name=FALSE)
+write.table(aggregate_total,"aggregate_total.txt",row.name=FALSE)
